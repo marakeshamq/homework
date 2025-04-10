@@ -1,25 +1,26 @@
-const WIDTH: usize = 7;
-const HEIGHT: usize = 7;
+fn get_symbol(col: usize, row: usize, max_col: usize, max_row: usize) -> char {
+    let is_border = row == 0 || row == max_row - 1 || col == 0 || col == max_col - 1;
+    let is_diagonal = col == row || col == max_col - 1 - row;
 
-pub fn draw_envelope() {
-    let mut output = String::new();
+    if is_border || is_diagonal {
+        '*'
+    } else {
+        ' '
+    }
+}
 
-    for y in 0..HEIGHT {
-        for x in 0..WIDTH {
-            if y == 0 || y == HEIGHT - 1 {
-                output.push('#'); 
-            } else if x == 0 || x == WIDTH - 1 {
-                output.push('#'); 
-            } else if x == y {
-                output.push('\\'); 
-            } else if x == WIDTH - y - 1 {
-                output.push('/'); 
-            } else {
-                output.push(' '); 
-            }
+fn main() {
+    const COLS: usize = 50;
+    const ROWS: usize = 50;
+
+    let mut result = String::new();
+
+    for row in 0..ROWS {
+        for col in 0..COLS {
+            result.push(get_symbol(col, row, COLS, ROWS));
         }
-        output.push('\n');
+        result.push('\n');
     }
 
-    print!("{}", output);
+    println!("{}", result);
 }
