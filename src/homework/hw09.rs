@@ -5,11 +5,9 @@ fn rotate_string(s: &str, shift: isize) -> String {
         return String::new();
     }
 
-    // Нормализуем сдвиг в пределах длины строки
     let shift = ((shift % len as isize) + len as isize) % len as isize;
     let shift = shift as usize;
 
-    // Разделяем строку на две части и переставляем их местами
     let mut chars: Vec<char> = s.chars().collect();
     chars.rotate_right(shift);
     chars.into_iter().collect()
